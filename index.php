@@ -1,7 +1,7 @@
 <?php
 $c = $_GET['c'];
 try{
-            $conexao = new PDO("mysql:host=localhost;dbname=agendamento_eventos","root","");
+            $conexao = new PDO("mysql:host=10.150.150.30;dbname=agendamento_eventos","agendamento_user","Cr3@DF@#2020");
             
         }catch(PDOException $erro){
             echo "Erro na conexao com o banco de dados".$erro->getMessage();
@@ -53,7 +53,7 @@ try{
 <div class="nav">
     <h2>Agendar entrega de carteira profissional-CREA/DF</h2>
 </div>
-
+<h4 id="relogio" style="color:#E0FFFF"></h4>
 <div class="cards">
   <div class="card" style="width: 18rem;">
     <div class="card-header">
@@ -123,7 +123,7 @@ $('#select').change(function (){
       var id = $("#06 option:selected").val();
       $.ajax({
             type: 'POST',
-            url: 'http://localhost/agendamento_eventos/confirma.php',
+            url: 'http://10.150.150.26/agendamento_eventos/confirma.php',
             async: false,
             data: {id: id, registro: '<?php echo $c; ?>'},
             success: function(response) {
@@ -137,7 +137,7 @@ $('#select').change(function (){
       var id = $("#08 option:selected").val();
       $.ajax({
             type: 'POST',
-            url: 'http://localhost/agendamento_eventos/confirma.php',
+            url: 'http://10.150.150.26/agendamento_eventos/confirma.php',
             async: false,
             data: {id: id, registro: '<?php echo $c; ?>'},
             success: function(response) {
@@ -152,5 +152,27 @@ $('#select').change(function (){
 });
 </script>
 
+<!--Função mostrar relógio-->
+<script>
+function relogio(){
+    var data = new Date();
+    var horas = data.getHours();
+    var minutos = data.getMinutes();
+    var segundos = data.getSeconds();
+
+    if(horas < 10){
+        horas = "0" + horas;
+    }
+    if(minutos <10){
+        minutos = "0" + minutos;
+    }
+    if(segundos < 10){
+        segundos = "0" + segundos;
+    }
+    document.getElementById("relogio").innerHTML=data.getDate()+"/"+(data.getMonth()+1)+"/"+data.getFullYear()+" "+horas+":"+minutos+":"+segundos;
+}
+window.setInterval("relogio()",1000)
+
+</script>
 </body>
 </html>

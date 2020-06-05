@@ -1,31 +1,10 @@
 <?php
 require 'phpmailer/PHPMailerAutoload.php';
-//require "../Util/FabricaConnection.php";
-
-/*
-$nome = $_POST["nome"];
-$email = $_POST["email"];
-$senha = $_POST["senha"];
-
-$nome = $_POST['nome'];
-$email = $_POST['email'];
-$registro = $_POST['nRegistro'];
-$expedicao = $_POST['dataExpedicao'];
-$processo = $_POST['processo'];
-$confirmado = $_POST['conf'];
-$retirada = $_POST['retirada'];
-
-print_r($nome);..
-*/
 
 class Email{
 
 	public function enviar($email, $nome, $registro){
 
-		//$conexao->query("INSERT INTO teste SET nome = '$nome', email='$email', senha='$senha'");
-		//$conexao = FabricaConnection::conectar();
-
-		//$id = $conexao->lastInsertId();
 
 
 		$link = "http://10.150.150.26/agendamento_eventos/index.php?h=".$registro;
@@ -63,11 +42,11 @@ class Email{
 		$Mailer->FromName = 'Crea-DF';
 		
 		//Assunto da mensagem
-		$Mailer->Subject = 'SOLENIDADE DE ENTREGA DE CARTEIRAS PROFISSIONAIS CREA-DF';
+		$Mailer->Subject = 'ENTREGA DE CARTEIRAS PROFISSIONAIS CREA-DF';
 
 		//$conteudo_email = '<img width="70px" src="cid:logo"/>';
 		//$Mailer->AddEmbeddedImage('convite.jpg','logo','logo');
-		$corpoEmail = "Prezado.</br>";
+		$corpoEmail = 'Prezado '.$nome.', acesse o link para agendar sua entrega de carteira profissional, que acontecerá nos dia 06 e 08/06/2020';
 		//Corpo da Mensagem
 		$Mailer->Body = utf8_decode($corpoEmail).$link."
 				<img src='cid:convite'><br>
@@ -77,7 +56,7 @@ class Email{
 
 
 		//Corpo da mensagem em texto
-		$Mailer->AltBody = 'E-mail automatico por favor não responda.';
+		$Mailer->AltBody = 'Prezado '.$nome.', acesse o link para agendar sua entrega de carteira profissional, que acontecerá nos dia 06 e 08/06/2020';
 
 	
 		
